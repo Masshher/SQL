@@ -24,7 +24,7 @@ public class LoginPage {
         return new VerificationPage();
     }
 
-    public void getError(String expectedText) {
+    public void verifyErrorNotificationVisiblity(String expectedText) {
         error.shouldHave(exactText(expectedText), Duration.ofSeconds(15)).should(visible);
     }
 }

@@ -15,12 +15,21 @@ public class DataHelper {
         String password;
     }
 
+    @Value
+    public static class VerificationCode {
+        String code;
+    }
+
     public static AuhtInfo getAuhtInfo() {
         return new AuhtInfo("vasya", "qwerty123");
     }
 
     public static AuhtInfo generateRandomUser() {
         return new AuhtInfo(generateRandomLogin(), generateRandomPassword());
+    }
+
+    public static AuhtInfo generateUserWithRandomPassword() {
+        return new AuhtInfo("vasya", generateRandomPassword());
     }
 
     public static String generateRandomLogin() {
@@ -33,13 +42,8 @@ public class DataHelper {
         return faker.internet().password();
     }
 
-    @Value
-    public static class VerificationCode {
-        String code;
-    }
-
-    public static String generateRandomVerificationCode() {
+    public static VerificationCode generateRandomVerificationCode() {
         Faker faker = new Faker(new Locale("en"));
-        return faker.numerify("######");
+        return new VerificationCode(faker.numerify("######"));
     }
 }

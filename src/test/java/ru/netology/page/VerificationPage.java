@@ -16,17 +16,21 @@ public class VerificationPage {
     private SelenideElement verifyButton = $("[data-test-id=\"action-verify\"]");
     private static SelenideElement error = $("[data-test-id=error-notification]");
 
-    public VerificationPage() {
-        codeField.should(visible);
+    public void verifyVerificationPageVisiblity() {
+        codeField.shouldBe(visible);
+    }
+
+    public void verifyErrorNotificationVisiblity() {
+        error.shouldHave(visible);
+    }
+
+    public void verify(String verificationCode) {
+        codeField.setValue(verificationCode);
+        verifyButton.click();
     }
 
     public DashboardPage validVerify(String verificationCode) {
-        codeField.setValue(verificationCode);
-        verifyButton.click();
+        verify(verificationCode);
         return new DashboardPage();
-    }
-
-    public void getError(String expectedText) {
-        error.shouldHave(exactText(expectedText), Duration.ofSeconds(15)).should(visible);
     }
 }
